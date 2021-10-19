@@ -15,7 +15,7 @@ import java.io.Serializable;
 @Getter
 @Setter
 @Entity
-@Table(name = "NAME_TABLE")
+@Table(name = "Atendimento")
 public class ServicoModel extends RepresentationModel<ServicoModel> implements Serializable{
 
     private static final long serialVersionUID = 1L;
