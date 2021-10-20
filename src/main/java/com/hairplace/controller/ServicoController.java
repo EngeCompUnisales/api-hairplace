@@ -27,8 +27,7 @@ public class ServicoController {
 
     @GetMapping("/servicos")
     public List<ServicoModel> getAllServicos(){
-        List<ServicoModel> servicosList = servicoRepository.findAll();
-        return servicosList;
+        return servicoRepository.findAll();
     }
 
     @GetMapping("/servico/{id}")
