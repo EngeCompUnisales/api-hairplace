@@ -40,7 +40,7 @@ public class SwaggerConfig {
         ApiInfo apiInfo = new ApiInfo("API REST Hairplace",
             "Api rest do Hairplace",
             "1.0", "Terms of Service",
-            new Contact("Jonathan Trabach",
+            new Contact("Engenharia de Computação UNISALES",
                 "", "trabachjonathan@gmail.com"),
             "Apache License Version 2.0",
             "https://www.apache.org/license.html", new ArrayList<VendorExtension>()
