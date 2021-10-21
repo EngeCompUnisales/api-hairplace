@@ -17,7 +17,7 @@ import java.io.Serializable;
 @Setter
 @Entity
 @JsonIgnoreProperties(ignoreUnknown = true)
-@Table(name = "user")
+@Table(name = "users")
 public class UserModel implements Serializable{
 
     private static final long serialVersionUID = 1L;
