@@ -26,6 +26,7 @@ public class UserController {
 
     @GetMapping("/login/{login}")
     public Optional<UserModel> loginByLogin(@PathVariable(value = "login") String login) {
+        System.out.println("BATEU");
         return userRepository.findByLogin(login);
     }
 
