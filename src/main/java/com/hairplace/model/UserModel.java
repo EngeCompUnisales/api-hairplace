@@ -12,12 +12,13 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
 import java.io.Serializable;
+import java.util.Date;
 
 @Getter
 @Setter
 @Entity
 @JsonIgnoreProperties(ignoreUnknown = true)
-@Table(name = "users")
+@Table(name = "usuario")
 public class UserModel implements Serializable{
 
     private static final long serialVersionUID = 1L;
@@ -27,14 +28,22 @@ public class UserModel implements Serializable{
     @Column(name = "id", unique = true, nullable = false)
     private long id;
 
-    @Column(name = "name", unique = false, nullable = false)
+    @Column(name = "nome", unique = false, nullable = false)
     private String name;
 
-    @Column(name = "login", unique = false, nullable = false)
-    private String login;
-    
-    @Column(name = "password", unique = false, nullable = false)
+    @Column(name = "email", unique = true, nullable = false)
+    private String email;
+
+    @Column(name = "senha", unique = false, nullable = false)
     private String password;
 
+    @Column(name = "celular", unique = false, nullable = false)
+    private String numberCellphone;
+
+    @Column(name = "cpf", unique = false, nullable = false)
+    private String cpf;
+
+    @Column(name = "data_nascimento", unique = false, nullable = false)
+    private Date birthDate;
 
 }

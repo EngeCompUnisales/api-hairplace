@@ -18,16 +18,15 @@ import java.util.Optional;
 
 @RestController
 @RequestMapping("/api/v1")
-@Api(tags = "Endpoints de User", value = "")
+@Api(tags = "Endpoints de Usuarios", value = "")
 public class UserController {
 
     @Autowired
     UserRepository userRepository;
 
-    @GetMapping("/login/{login}")
-    public Optional<UserModel> loginByLogin(@PathVariable(value = "login") String login) {
-        System.out.println("BATEU");
-        return userRepository.findByLogin(login);
+    @GetMapping("/auth/login")
+    public Optional<UserModel> loginByEmailAndPassword(@RequestParam String email, @RequestParam String password) {
+        return userRepository.findByEmailAndPassword(email, password);
     }
 
     @PostMapping("/user")
