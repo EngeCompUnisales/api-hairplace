@@ -17,8 +17,8 @@ import java.io.Serializable;
 @Setter
 @Entity
 @JsonIgnoreProperties(ignoreUnknown = true)
-@Table(name = "users")
-public class UserModel implements Serializable{
+@Table(name = "servico")
+public class Servico implements Serializable{
 
     private static final long serialVersionUID = 1L;
 
@@ -27,14 +27,18 @@ public class UserModel implements Serializable{
     @Column(name = "id", unique = true, nullable = false)
     private long id;
 
-    @Column(name = "name", unique = false, nullable = false)
-    private String name;
+    @Column(name = "nome", unique = true, nullable = false)
+    private String nome;
 
-    @Column(name = "login", unique = false, nullable = false)
-    private String login;
+    @Column(name = "preco", unique = false, nullable = false)
+    private long preco;
+
+    public long getId() {
+    	return id;
+    }
     
-    @Column(name = "password", unique = false, nullable = false)
-    private String password;
-
+    public void setId(long id) {
+    	this.id = id;
+    }
 
 }

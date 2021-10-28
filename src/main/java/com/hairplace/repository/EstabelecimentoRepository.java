@@ -1,10 +1,11 @@
 package com.hairplace.repository;
 
-import com.hairplace.model.Servico;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
+import com.hairplace.model.Estabelecimento;
+
 @Repository
-public interface ServicoRepository extends JpaRepository<Servico, Long>{
+public interface EstabelecimentoRepository extends JpaRepository<Estabelecimento, Long>{
 
 }
