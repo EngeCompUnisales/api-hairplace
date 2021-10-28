@@ -20,7 +20,7 @@ import io.swagger.annotations.Api;
 
 @RestController
 @RequestMapping("/api/v1")
-@Api(tags = "Endpoints de User", value = "")
+@Api(tags = "Endpoints de Usuarios", value = "")
 public class UserController {
 
     @Autowired
@@ -29,6 +29,10 @@ public class UserController {
     @GetMapping("/login/{login}")
     public Optional<User> loginByLogin(@PathVariable(value = "login") String login) {
         return userRepository.findByLogin(login);
+        
+    @GetMapping("/auth/login")
+    public Optional<UserModel> loginByEmailAndPassword(@RequestParam String email, @RequestParam String password) {
+        return userRepository.findByEmailAndPassword(email, password);
     }
 
     @PostMapping("/user")
