@@ -1,8 +1,0 @@
-com/hairplace/HairplaceApplication.class
-com/hairplace/controller/ServicoController.class
-com/hairplace/repository/UserRepository.class
-com/hairplace/model/ServicoModel.class
-com/hairplace/repository/ServicoRepository.class
-com/hairplace/model/UserModel.class
-com/hairplace/controller/UserController.class
-com/hairplace/config/SwaggerConfig.class
