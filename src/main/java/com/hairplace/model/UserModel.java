@@ -18,13 +18,8 @@ import java.util.Date;
 @Setter
 @Entity
 @JsonIgnoreProperties(ignoreUnknown = true)
-<<<<<<< HEAD:src/main/java/com/hairplace/model/User.java
-@Table(name = "users")
-public class User implements Serializable{
-=======
 @Table(name = "usuario")
 public class UserModel implements Serializable{
->>>>>>> ed31c02358971532a817bcf51c84087fd2af24b2:src/main/java/com/hairplace/model/UserModel.java
 
     private static final long serialVersionUID = 1L;
 
@@ -42,11 +37,6 @@ public class UserModel implements Serializable{
     @Column(name = "senha", unique = false, nullable = false)
     private String password;
 
-<<<<<<< HEAD:src/main/java/com/hairplace/model/User.java
-	public long getId() {
-		return id;
-	}
-=======
     @Column(name = "celular", unique = false, nullable = false)
     private String numberCellphone;
 
@@ -55,6 +45,5 @@ public class UserModel implements Serializable{
 
     @Column(name = "data_nascimento", unique = false, nullable = false)
     private Date birthDate;
->>>>>>> ed31c02358971532a817bcf51c84087fd2af24b2:src/main/java/com/hairplace/model/UserModel.java
 
 }

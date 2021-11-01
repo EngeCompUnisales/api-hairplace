@@ -37,8 +37,7 @@ public class SwaggerConfig {
 
     public ApiInfo metaInfo() {
 
-        @SuppressWarnings("rawtypes")
-		ApiInfo apiInfo = new ApiInfo("API REST Hairplace",
+        ApiInfo apiInfo = new ApiInfo("API REST Hairplace",
             "Api rest do Hairplace",
             "1.0", "Terms of Service",
             new Contact("Engenharia de Computação UNISALES",

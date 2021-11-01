@@ -1,6 +1,6 @@
 package com.hairplace.controller;
 
-import com.hairplace.model.Servico;
+import com.hairplace.model.ServicoModel;
 import com.hairplace.repository.ServicoRepository;
 import io.swagger.annotations.Api;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -26,29 +26,29 @@ public class ServicoController {
     ServicoRepository servicoRepository;
 
     @GetMapping("/servicos")
-    public List<Servico> getAllServicos(){
+    public List<ServicoModel> getAllServicos(){
         return servicoRepository.findAll();
     }
 
     @GetMapping("/servico/{id}")
-    public Optional<Servico> getServicoById(@PathVariable(value="id") long id){
+    public Optional<ServicoModel> getServicoById(@PathVariable(value="id") long id){
         return servicoRepository.findById(id);
     }
 
     @PostMapping("/servico")
-    public Servico saveServico(@RequestBody @Valid Servico servico) {
+    public ServicoModel saveServico(@RequestBody @Valid ServicoModel servico) {
         return servicoRepository.save(servico);
     }
 
     @DeleteMapping("/servico/{id}")
     public void deleteServico(@PathVariable(value="id") long id) {
-        Optional<Servico> servico = servicoRepository.findById(id);
+        Optional<ServicoModel> servico = servicoRepository.findById(id);
         servicoRepository.deleteById(servico.get().getId());
     }
 
     @PutMapping("/servico/{id}")
-    public Servico updateServico(@PathVariable(value="id") long id, @RequestBody @Valid Servico servicoUpdate) {
-        Optional<Servico> servico = servicoRepository.findById(id);
+    public ServicoModel updateServico(@PathVariable(value="id") long id, @RequestBody @Valid ServicoModel servicoUpdate) {
+        Optional<ServicoModel> servico = servicoRepository.findById(id);
         servicoUpdate.setId(servico.get().getId());
         return servicoRepository.save(servicoUpdate);
     }
