@@ -1,7 +1,9 @@
 package com.hairplace.controller;
 
 import com.hairplace.model.EstabelecimentoModel;
+import com.hairplace.model.UserModel;
 import com.hairplace.repository.EstabelecimentoRepository;
+import com.hairplace.repository.UserRepository;
 import io.swagger.annotations.Api;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -23,6 +25,9 @@ import java.util.Optional;
 public class EstabelecimentoController {
 
     @Autowired
+    UserRepository userRepository ;
+
+    @Autowired
     EstabelecimentoRepository estabelecimentoRepository ;
 
     @GetMapping("/estabelecimento")
@@ -37,7 +42,14 @@ public class EstabelecimentoController {
 
     @PostMapping("/estabelecimento")
     public EstabelecimentoModel saveEstabelecimento(@RequestBody @Valid EstabelecimentoModel estabelecimento) {
-        return estabelecimentoRepository.save(estabelecimento);
+        try{
+            final UserModel user = userRepository.getById(estabelecimento.getResponsible().getId());
+            estabelecimento.setResponsible(user);
+            return estabelecimentoRepository.save(estabelecimento);
+        }catch (Exception e){
+            throw e;
+        }
+
     }
 
     @DeleteMapping("/estabelecimento/{id}")

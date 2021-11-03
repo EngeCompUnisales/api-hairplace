@@ -37,14 +37,17 @@ public class AtendimentoModel implements Serializable{
     private Date serviceCompleted;
 
     @OneToOne(cascade = CascadeType.ALL)
+    @JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
     @JoinColumn(name = "id_usuario", referencedColumnName = "id")
     private UserModel client;
 
     @OneToOne(cascade = CascadeType.ALL)
+    @JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
     @JoinColumn(name = "id_servico", referencedColumnName = "id")
     private ServicoModel service;
 
     @OneToOne(cascade = CascadeType.ALL)
+    @JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
     @JoinColumn(name = "id_estabelecimento", referencedColumnName = "id")
     private EstabelecimentoModel businessService;
 

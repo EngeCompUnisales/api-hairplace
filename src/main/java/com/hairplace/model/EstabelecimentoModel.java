@@ -42,6 +42,7 @@ public class EstabelecimentoModel implements Serializable{
     private String numberCellphone;
 
     @OneToOne(cascade = CascadeType.ALL)
+    @JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
     @JoinColumn(name = "id_responsavel", referencedColumnName = "id")
     private UserModel responsible;
 
