@@ -1,6 +1,9 @@
 package com.hairplace.controller;
 
+import com.hairplace.model.EstabelecimentoModel;
 import com.hairplace.model.ServicoModel;
+import com.hairplace.model.UserModel;
+import com.hairplace.repository.EstabelecimentoRepository;
 import com.hairplace.repository.ServicoRepository;
 import io.swagger.annotations.Api;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -25,6 +28,9 @@ public class ServicoController {
     @Autowired
     ServicoRepository servicoRepository;
 
+    @Autowired
+    EstabelecimentoRepository estabelecimentoRepository ;
+
     @GetMapping("/servicos")
     public List<ServicoModel> getAllServicos(){
         return servicoRepository.findAll();
@@ -37,7 +43,17 @@ public class ServicoController {
 
     @PostMapping("/servico")
     public ServicoModel saveServico(@RequestBody @Valid ServicoModel servico) {
-        return servicoRepository.save(servico);
+        try {
+            final EstabelecimentoModel business = estabelecimentoRepository.getById(servico.getBusinessService().getId());
+
+            servico.setBusinessService(business);
+
+            return servicoRepository.save(servico);
+
+        }catch (Exception e){
+            throw e;
+        }
+
     }
 
     @DeleteMapping("/servico/{id}")
