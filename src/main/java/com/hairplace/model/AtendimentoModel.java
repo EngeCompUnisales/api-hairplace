@@ -30,11 +30,8 @@ public class AtendimentoModel implements Serializable{
     @Column(name = "id", unique = true, nullable = false)
     private long id;
 
-    @Column(name = "entrada", unique = false, nullable = false)
+    @Column(name = "inicio", unique = false, nullable = false)
     private Date startService;
-
-    @Column(name = "saida", unique = true, nullable = false)
-    private Date endService;
 
     @Column(name = "fim", unique = false, nullable = false)
     private Date serviceCompleted;
