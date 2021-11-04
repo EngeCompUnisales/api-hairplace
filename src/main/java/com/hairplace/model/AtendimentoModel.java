@@ -51,4 +51,5 @@ public class AtendimentoModel implements Serializable{
     @JoinColumn(name = "id_estabelecimento", referencedColumnName = "id")
     private EstabelecimentoModel businessService;
 
+
 }

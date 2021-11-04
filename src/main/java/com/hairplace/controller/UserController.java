@@ -28,11 +28,6 @@ public class UserController {
     public Optional<UserModel> loginByEmailAndPassword(@RequestParam String email, @RequestParam String password) {
         return userRepository.findByEmailAndPassword(email, password);
     }
-    
-    @GetMapping("/auth/{id}")
-    public Optional<UserModel> findUserById(@PathVariable(value = "id") long  id) {
-    	return userRepository.findById(id);
-    }
 
     @PostMapping("/user")
     public UserModel saveUser(@RequestBody @Valid UserModel user) {
