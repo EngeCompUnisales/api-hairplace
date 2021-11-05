@@ -20,8 +20,8 @@ import java.util.Date;
 @Setter
 @Entity
 @JsonIgnoreProperties(ignoreUnknown = true)
-@Table(name = "atendimento")
-public class AtendimentoModel implements Serializable{
+@Table(name = "agendamento")
+public class AgendamentoModel implements Serializable{
 
     private static final long serialVersionUID = 1L;
 
@@ -30,10 +30,21 @@ public class AtendimentoModel implements Serializable{
     @Column(name = "id", unique = true, nullable = false)
     private long id;
 
+    @Column(name = "inicio", unique = false, nullable = false)
+    private Date startService;
+
+    @Column(name = "fim", unique = false, nullable = false)
+    private Date serviceCompleted;
+
     @OneToOne(cascade = CascadeType.ALL)
     @JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
-    @JoinColumn(name = "id_agendamento", referencedColumnName = "id")
-    private AgendamentoModel agendamento;
+    @JoinColumn(name = "id_usuario", referencedColumnName = "id")
+    private UserModel client;
+
+    @OneToOne(cascade = CascadeType.ALL)
+    @JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
+    @JoinColumn(name = "id_servico", referencedColumnName = "id")
+    private ServicoModel service;
 
     @OneToOne(cascade = CascadeType.ALL)
     @JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
