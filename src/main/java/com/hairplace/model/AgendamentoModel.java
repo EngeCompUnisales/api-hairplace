@@ -30,7 +30,7 @@ public class AgendamentoModel implements Serializable{
     @Column(name = "id", unique = true, nullable = false)
     private long id;
 
-    @Column(name = "inicio", unique = false, nullable = false)
+    @Column(name = "agendado", unique = false, nullable = false)
     private Date startService;
 
     @Column(name = "realizado", unique = false, nullable = true)
