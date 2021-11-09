@@ -54,7 +54,6 @@ public class AgendamentoController {
     @PostMapping("/agendamento")
     public AgendamentoModel saveAgendamento(@RequestBody @Valid AgendamentoModel agendamento) {
         try {
-            //TODO: refazer
             final Optional<UserModel> user = userRepository.findById(agendamento.getClient().getId());
             final ServicoModel service = servicoRepository.getById(agendamento.getService().getId());
             final EstabelecimentoModel business = estabelecimentoRepository.getById(agendamento.getBusinessService().getId());
