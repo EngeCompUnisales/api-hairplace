@@ -40,11 +40,11 @@ public class EstabelecimentoController {
         return estabelecimentoRepository.findById(id);
     }
     
-    @GetMapping("/estabelecimento/{idUser}")
+    @GetMapping("/estabelecimento/{id_user}")
     public Optional<EstabelecimentoModel> getEstabelecimentoByIdUser(@PathVariable(value = "idUser") long idUser) {
     	Optional<UserModel> user = userRepository.findById(idUser);
     	
-    	return estabelecimentoRepository.findEstabelecimentoByIdUser(user.get().getId());
+    	return estabelecimentoRepository.findEstabelecimentoByResponsible(user.get().getId());
     }
 
     @PostMapping("/estabelecimento")

@@ -4,7 +4,7 @@ import com.hairplace.model.AgendamentoModel;
 import com.hairplace.model.EstabelecimentoModel;
 import com.hairplace.model.ServicoModel;
 import com.hairplace.model.UserModel;
-import com.hairplace.repository.AtendimentoRepository;
+import com.hairplace.repository.AgendamentoRepository;
 import com.hairplace.repository.EstabelecimentoRepository;
 import com.hairplace.repository.ServicoRepository;
 import com.hairplace.repository.UserRepository;
@@ -39,30 +39,31 @@ public class AgendamentoController {
     EstabelecimentoRepository estabelecimentoRepository ;
 
     @Autowired
-    AtendimentoRepository atendimentoRepository;
+    AgendamentoRepository agendamentoRepository;
 
     @GetMapping("/agendamento")
     public List<AgendamentoModel> getAllAgendamento(){
-        return atendimentoRepository.findAll();
+        return agendamentoRepository.findAll();
     }
 
     @GetMapping("/agendamento/{id}")
     public Optional<AgendamentoModel> getAgendamentoById(@PathVariable(value="id") long id){
-        return atendimentoRepository.findById(id);
+        return agendamentoRepository.findById(id);
     }
 
     @PostMapping("/agendamento")
-    public AgendamentoModel saveAgendamento(@RequestBody @Valid AgendamentoModel atendimento) {
+    public AgendamentoModel saveAgendamento(@RequestBody @Valid AgendamentoModel agendamento) {
         try {
-            final Optional<UserModel> user = userRepository.findById(atendimento.getClient().getId());
-            final ServicoModel service = servicoRepository.getById(atendimento.getService().getId());
-            final EstabelecimentoModel business = estabelecimentoRepository.getById(atendimento.getBusinessService().getId());
+            //TODO: refazer
+            final Optional<UserModel> user = userRepository.findById(agendamento.getClient().getId());
+            final ServicoModel service = servicoRepository.getById(agendamento.getService().getId());
+            final EstabelecimentoModel business = estabelecimentoRepository.getById(agendamento.getBusinessService().getId());
 
-            atendimento.setClient(user.get());
-            atendimento.setService(service);
-            atendimento.setBusinessService(business);
+            agendamento.setClient(user.get());
+            agendamento.setService(service);
+            agendamento.setBusinessService(business);
 
-            return atendimentoRepository.save(atendimento);
+            return agendamentoRepository.save(agendamento);
 
         }catch (Exception e){
             throw e;
@@ -71,14 +72,14 @@ public class AgendamentoController {
 
     @DeleteMapping("/agendamento/{id}")
     public void deleteAgendamento(@PathVariable(value="id") long id) {
-        Optional<AgendamentoModel> agendamento = atendimentoRepository.findById(id);
-        atendimentoRepository.deleteById(agendamento.get().getId());
+        Optional<AgendamentoModel> agendamento = agendamentoRepository.findById(id);
+        agendamentoRepository.deleteById(agendamento.get().getId());
     }
 
     @PutMapping("/agendamento/{id}")
-    public AgendamentoModel updateAgendamento(@PathVariable(value="id") long id, @RequestBody @Valid AgendamentoModel atendimentoUpdate) {
-        Optional<AgendamentoModel> atendimento = atendimentoRepository.findById(id);
-        atendimentoUpdate.setId(atendimento.get().getId());
-        return atendimentoRepository.save(atendimentoUpdate);
+    public AgendamentoModel updateAgendamento(@PathVariable(value="id") long id, @RequestBody @Valid AgendamentoModel agendamentoUpdate) {
+        Optional<AgendamentoModel> agendamento = agendamentoRepository.findById(id);
+        agendamentoUpdate.setId(agendamento.get().getId());
+        return agendamentoRepository.save(agendamentoUpdate);
     }
 }
