@@ -33,7 +33,7 @@ public class AgendamentoModel implements Serializable{
     @Column(name = "inicio", unique = false, nullable = false)
     private Date startService;
 
-    @Column(name = "fim", unique = false, nullable = true)
+    @Column(name = "realizado", unique = false, nullable = true)
     private Date serviceCompleted;
 
     @OneToOne(cascade = CascadeType.ALL)

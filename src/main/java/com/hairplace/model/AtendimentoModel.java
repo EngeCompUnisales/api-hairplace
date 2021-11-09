@@ -35,10 +35,4 @@ public class AtendimentoModel implements Serializable{
     @JoinColumn(name = "id_agendamento", referencedColumnName = "id")
     private AgendamentoModel agendamento;
 
-    @OneToOne(cascade = CascadeType.ALL)
-    @JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
-    @JoinColumn(name = "id_estabelecimento", referencedColumnName = "id")
-    private EstabelecimentoModel businessService;
-
-
 }

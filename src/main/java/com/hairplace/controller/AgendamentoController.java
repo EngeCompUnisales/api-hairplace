@@ -1,13 +1,7 @@
 package com.hairplace.controller;
 
-import com.hairplace.model.AgendamentoModel;
-import com.hairplace.model.EstabelecimentoModel;
-import com.hairplace.model.ServicoModel;
-import com.hairplace.model.UserModel;
-import com.hairplace.repository.AgendamentoRepository;
-import com.hairplace.repository.EstabelecimentoRepository;
-import com.hairplace.repository.ServicoRepository;
-import com.hairplace.repository.UserRepository;
+import com.hairplace.model.*;
+import com.hairplace.repository.*;
 import io.swagger.annotations.Api;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -20,6 +14,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import javax.validation.Valid;
+import java.util.Date;
 import java.util.List;
 import java.util.Optional;
 
@@ -40,6 +35,9 @@ public class AgendamentoController {
 
     @Autowired
     AgendamentoRepository agendamentoRepository;
+
+    @Autowired
+    AtendimentoRepository atendimentoRepository;
 
     @GetMapping("/agendamento")
     public List<AgendamentoModel> getAllAgendamento(){
@@ -80,5 +78,19 @@ public class AgendamentoController {
         Optional<AgendamentoModel> agendamento = agendamentoRepository.findById(id);
         agendamentoUpdate.setId(agendamento.get().getId());
         return agendamentoRepository.save(agendamentoUpdate);
+    }
+
+
+    @PutMapping("/agendamento/completed/{id}")
+    public AgendamentoModel updateAgendamentoCompleted(@PathVariable(value="id") long id, @RequestBody @Valid Date dateCompleted) {
+        Optional<AgendamentoModel> agendamento = agendamentoRepository.findById(id);
+        agendamento.get().setServiceCompleted(dateCompleted);
+
+        AtendimentoModel atendimento = new AtendimentoModel();
+        atendimento.setAgendamento(agendamento.get());
+
+        atendimentoRepository.save(atendimento);
+
+        return agendamentoRepository.save(agendamento.get());
     }
 }
