@@ -39,6 +39,13 @@ public class EstabelecimentoController {
     public Optional<EstabelecimentoModel> getEstabelecimentoById(@PathVariable(value="id") long id){
         return estabelecimentoRepository.findById(id);
     }
+    
+    @GetMapping("/estabelecimento/{idUser}")
+    public Optional<EstabelecimentoModel> getEstabelecimentoByIdUser(@PathVariable(value = "idUser") long idUser) {
+    	Optional<UserModel> user = userRepository.findById(idUser);
+    	
+    	return estabelecimentoRepository.findEstabelecimentoByIdUser(user.get().getId());
+    }
 
     @PostMapping("/estabelecimento")
     public EstabelecimentoModel saveEstabelecimento(@RequestBody @Valid EstabelecimentoModel estabelecimento) {
