@@ -10,6 +10,6 @@ import java.util.Optional;
 @Repository
 public interface EstabelecimentoRepository extends JpaRepository<EstabelecimentoModel, Long>{
 
-	Optional<EstabelecimentoModel> findEstabelecimentoByResponsible(long idUser);
+	Optional<EstabelecimentoModel> findEstabelecimentoByResponsibleById(long idUser);
 	
 }
