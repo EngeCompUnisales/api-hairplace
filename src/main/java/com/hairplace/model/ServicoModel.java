@@ -30,7 +30,7 @@ public class ServicoModel implements Serializable{
     @Column(name = "id", unique = true, nullable = false)
     private long id;
 
-    @Column(name = "nome", unique = true, nullable = false)
+    @Column(name = "nome", unique = false, nullable = false)
     private String nome;
 
     @Column(name = "preco", unique = false, nullable = false)
