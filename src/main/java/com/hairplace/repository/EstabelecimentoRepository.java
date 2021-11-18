@@ -12,7 +12,7 @@ import java.util.Optional;
 @Repository
 public interface EstabelecimentoRepository extends JpaRepository<EstabelecimentoModel, Long>{
 
-	Optional<EstabelecimentoModel> findByResponsible(long idUser);
+	List<EstabelecimentoModel> findByResponsible(Optional<UserModel> user);
 
 	@Query("Select e from EstabelecimentoModel e where e.name like %:namePart%")
 	List<EstabelecimentoModel> findByNameContaing(@Param("namePart") String namePart);
