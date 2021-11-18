@@ -43,22 +43,17 @@ public class EstabelecimentoController {
     public Optional<EstabelecimentoModel> getEstabelecimentoById(@PathVariable(value="id") long id){
         return estabelecimentoRepository.findById(id);
     }
+
+    @GetMapping("/estabelecimento/find/{name}")
+    public List<EstabelecimentoModel> getEstabelecimentoByName(@PathVariable(value = "name") String name) {
+        return estabelecimentoRepository.findByNameContaing(name);
+    }
     
     @GetMapping("/estabelecimento/responsible/{id_responsible}")
     public Optional<EstabelecimentoModel> getEstabelecimentoByResponsible(@PathVariable(value = "id_responsible") long idUser) {
     	Optional<UserModel> user = userRepository.findById(idUser);
     	System.out.println(user.get().getId());
     	return estabelecimentoRepository.findByResponsible(user.get().getId());
-    }
-
-    @Repository
-    public interface EstabelecimentoRepository extends JpaRepository<EstabelecimentoModel, Long>{
-
-        Optional<EstabelecimentoModel> findByResponsible(long idUser);
-
-        @Query("Select e from EstabelecimentoModel e where e.name like %:namePart%")
-        List<EstabelecimentoModel> findByNameContaing(@Param("namePart") String namePart);
-
     }
 
     @PostMapping("/estabelecimento")
