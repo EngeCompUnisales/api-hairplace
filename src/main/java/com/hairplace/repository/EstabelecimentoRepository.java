@@ -10,6 +10,7 @@ import java.util.Optional;
 @Repository
 public interface EstabelecimentoRepository extends JpaRepository<EstabelecimentoModel, Long>{
 
+	@Query("select e from EstabelecimentoModel e join UserModel u on e.responsible = u.id where u.id = ?1")
 	Optional<EstabelecimentoModel> findByResponsible(long idUser);
 	
 }

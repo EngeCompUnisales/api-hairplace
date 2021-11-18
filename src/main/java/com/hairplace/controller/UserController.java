@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import javax.validation.Valid;
+import java.util.List;
 import java.util.Optional;
 
 @RestController
@@ -23,6 +24,11 @@ public class UserController {
 
     @Autowired
     UserRepository userRepository;
+
+    @GetMapping("/users")
+    public List<UserModel> getAllUser() {
+        return userRepository.findAll();
+    }
 
     @GetMapping("/auth/login")
     public Optional<UserModel> loginByEmailAndPassword(@RequestParam String email, @RequestParam String password) {
