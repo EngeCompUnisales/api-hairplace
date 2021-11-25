@@ -1,8 +1,6 @@
 package com.hairplace.controller;
 
-import com.hairplace.model.EstabelecimentoModel;
-import com.hairplace.model.ServicoModel;
-import com.hairplace.model.UserModel;
+import com.hairplace.model.*;
 import com.hairplace.repository.EstabelecimentoRepository;
 import com.hairplace.repository.ServicoRepository;
 import io.swagger.annotations.Api;
@@ -32,13 +30,18 @@ public class ServicoController {
     EstabelecimentoRepository estabelecimentoRepository ;
 
     @GetMapping("/servicos")
-    public List<ServicoModel> getAllServicos(){
+    public List<ServicoModel> getAllservicos(){
         return servicoRepository.findAll();
     }
 
     @GetMapping("/servico/{id}")
     public Optional<ServicoModel> getServicoById(@PathVariable(value="id") long id){
         return servicoRepository.findById(id);
+    }
+
+    @GetMapping("/servico/find/{nome}")
+    public List<ServicoModel> getservicoByNomeIgnoreCase(@PathVariable(value = "nome") String nome) {
+        return servicoRepository.findByNameIgnoreCase(nome.toUpperCase());
     }
 
     @PostMapping("/servico")
@@ -67,5 +70,21 @@ public class ServicoController {
         Optional<ServicoModel> servico = servicoRepository.findById(id);
         servicoUpdate.setId(servico.get().getId());
         return servicoRepository.save(servicoUpdate);
+    }
+
+    @PutMapping("/servico/inactive/{id}")
+    public ServicoModel updateServicoInactive(@PathVariable(value="id") long id) {
+        Optional<ServicoModel> servico = servicoRepository.findById(id);
+        servico.get().setInativo(true);
+
+        return servicoRepository.save(servico.get());
+    }
+
+    @PutMapping("/servico/active/{id}")
+    public ServicoModel updateServicoActive(@PathVariable(value="id") long id) {
+        Optional<ServicoModel> servico = servicoRepository.findById(id);
+        servico.get().setInativo(false);
+
+        return servicoRepository.save(servico.get());
     }
 }
