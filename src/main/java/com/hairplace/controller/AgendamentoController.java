@@ -93,4 +93,13 @@ public class AgendamentoController {
 
         return agendamentoRepository.save(agendamento.get());
     }
+
+    @PutMapping("/agendamento/cancel/{id}")
+    public AgendamentoModel updateAgendamentoCanceled(@PathVariable(value="id") long id) {
+        Optional<AgendamentoModel> agendamento = agendamentoRepository.findById(id);
+        agendamento.get().setStatus(Status.CANCELADO);
+
+        return agendamentoRepository.save(agendamento.get());
+    }
+
 }
