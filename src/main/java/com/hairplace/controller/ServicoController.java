@@ -1,6 +1,7 @@
 package com.hairplace.controller;
 
-import com.hairplace.model.*;
+import com.hairplace.model.EstabelecimentoModel;
+import com.hairplace.model.ServicoModel;
 import com.hairplace.repository.EstabelecimentoRepository;
 import com.hairplace.repository.ServicoRepository;
 import io.swagger.annotations.Api;
@@ -30,7 +31,7 @@ public class ServicoController {
     EstabelecimentoRepository estabelecimentoRepository ;
 
     @GetMapping("/servicos")
-    public List<ServicoModel> getAllservicos(){
+    public List<ServicoModel> getAllServicos(){
         return servicoRepository.findAll();
     }
 
@@ -40,7 +41,7 @@ public class ServicoController {
     }
 
     @GetMapping("/servico/find/{nome}")
-    public List<ServicoModel> getservicoByNomeIgnoreCase(@PathVariable(value = "nome") String nome) {
+    public List<ServicoModel> getServicoByNomeIgnoreCase(@PathVariable(value = "nome") String nome) {
         return servicoRepository.findByNameIgnoreCase(nome.toUpperCase());
     }
 
