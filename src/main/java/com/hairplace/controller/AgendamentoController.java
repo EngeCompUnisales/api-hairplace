@@ -44,6 +44,12 @@ public class AgendamentoController {
         return agendamentoRepository.findAll();
     }
 
+    @GetMapping("/agendamentos/cliente/{id_user}")
+    public List<AgendamentoModel> getAllAgendamentosByCliente(@PathVariable(value="id_user") long idUser){
+        Optional<UserModel> user = userRepository.findById(idUser);
+        return agendamentoRepository.findByClient(user);
+    }
+
     @GetMapping("/agendamento/{id}")
     public Optional<AgendamentoModel> getAgendamentoById(@PathVariable(value="id") long id){
         return agendamentoRepository.findById(id);
