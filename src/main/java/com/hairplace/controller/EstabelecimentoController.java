@@ -18,6 +18,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import javax.validation.Valid;
 import java.util.List;
+import java.util.Locale;
 import java.util.Optional;
 
 @RestController
@@ -43,7 +44,7 @@ public class EstabelecimentoController {
 
     @GetMapping("/estabelecimento/find/{name}")
     public List<EstabelecimentoModel> getEstabelecimentoByName(@PathVariable(value = "name") String name) {
-        return estabelecimentoRepository.findByNameContaing(name);
+        return estabelecimentoRepository.findByNameContaing(name.toUpperCase());
     }
     
     @GetMapping("/estabelecimento/responsible/{id_responsible}")
