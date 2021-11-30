@@ -75,6 +75,7 @@ public class EstabelecimentoController {
     public EstabelecimentoModel updateEstabelecimento(@PathVariable(value="id") long id, @RequestBody @Valid EstabelecimentoModel estabelecimentoUpdate) {
         Optional<EstabelecimentoModel> estabelecimento = estabelecimentoRepository.findById(id);
         estabelecimentoUpdate.setId(estabelecimento.get().getId());
+        estabelecimentoUpdate.setResponsible(estabelecimento.get().getResponsible());
         return estabelecimentoRepository.save(estabelecimentoUpdate);
     }
 }
