@@ -88,9 +88,10 @@ public class AgendamentoController {
 
 
     @PutMapping("/agendamento/completed/{id}")
-    public AgendamentoModel updateAgendamentoCompleted(@PathVariable(value="id") long id, @RequestBody @Valid Date dateCompleted) {
+    public AgendamentoModel updateAgendamentoCompleted(@PathVariable(value="id") long id) {
         Optional<AgendamentoModel> agendamento = agendamentoRepository.findById(id);
-        agendamento.get().setServiceCompleted(dateCompleted);
+        agendamento.get().setServiceCompleted(new Date());
+        agendamento.get().setStatus(Status.CONCLUIDO);
 
         AtendimentoModel atendimento = new AtendimentoModel();
         atendimento.setAgendamento(agendamento.get());
