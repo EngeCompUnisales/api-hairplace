@@ -2,8 +2,10 @@ package com.hairplace.controller;
 
 import com.hairplace.model.EstabelecimentoModel;
 import com.hairplace.model.ServicoModel;
+import com.hairplace.model.UserModel;
 import com.hairplace.repository.EstabelecimentoRepository;
 import com.hairplace.repository.ServicoRepository;
+import com.hairplace.repository.UserRepository;
 import io.swagger.annotations.Api;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -16,6 +18,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import javax.validation.Valid;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -45,6 +48,20 @@ public class ServicoController {
         return servicoRepository.findByNameIgnoreCase(nome.toUpperCase());
     }
 
+    @GetMapping("/servico/getActiveServices/{idEstabelecimento}")
+    public List<ServicoModel> getActiveServicesByIdBarber(@PathVariable(value = "idEstabelecimento") long id) {
+        Optional<EstabelecimentoModel> estabelecimento = estabelecimentoRepository.findById(id);
+
+        List<ServicoModel> activeServices = new ArrayList<ServicoModel>();
+        for(ServicoModel servico : servicoRepository.findByBusinessService(estabelecimento)) {
+            if(!servico.isInativo()) {
+                activeServices.add(servico);
+            }
+        }
+
+        return activeServices;
+    }
+
     @PostMapping("/servico")
     public ServicoModel saveServico(@RequestBody @Valid ServicoModel servico) {
         try {
@@ -58,12 +75,6 @@ public class ServicoController {
             throw e;
         }
 
-    }
-
-    @DeleteMapping("/servico/{id}")
-    public void deleteServico(@PathVariable(value="id") long id) {
-        Optional<ServicoModel> servico = servicoRepository.findById(id);
-        servicoRepository.deleteById(servico.get().getId());
     }
 
     @PutMapping("/servico/{id}")
@@ -87,5 +98,11 @@ public class ServicoController {
         servico.get().setInativo(false);
 
         return servicoRepository.save(servico.get());
+    }
+
+    @DeleteMapping("/servico/{id}")
+    public void deleteServico(@PathVariable(value="id") long id) {
+        Optional<ServicoModel> servico = servicoRepository.findById(id);
+        servicoRepository.deleteById(servico.get().getId());
     }
 }
