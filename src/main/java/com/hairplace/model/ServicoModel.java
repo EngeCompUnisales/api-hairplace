@@ -36,6 +36,9 @@ public class ServicoModel implements Serializable{
     @Column(name = "preco", unique = false, nullable = false)
     private long preco;
 
+    @Column(name = "inativo", unique = false, nullable = false, columnDefinition = "boolean default false")
+    private boolean inativo = false;
+
     @OneToOne(cascade = CascadeType.ALL)
     @JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
     @JoinColumn(name = "id_estabelecimento", referencedColumnName = "id")

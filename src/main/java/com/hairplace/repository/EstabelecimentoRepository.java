@@ -15,7 +15,7 @@ public interface EstabelecimentoRepository extends JpaRepository<Estabelecimento
 
 	List<EstabelecimentoModel> findByResponsible(Optional<UserModel> user);
 
-	@Query("Select e from EstabelecimentoModel e where e.name like %:namePart%")
+	@Query("Select e from EstabelecimentoModel e where UPPER(e.name) like %:namePart%")
 	List<EstabelecimentoModel> findByNameContaing(@Param("namePart") String namePart);
 
 }

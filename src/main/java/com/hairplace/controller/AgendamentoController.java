@@ -44,6 +44,12 @@ public class AgendamentoController {
         return agendamentoRepository.findAll();
     }
 
+    @GetMapping("/agendamentos/cliente/{id_user}")
+    public List<AgendamentoModel> getAllAgendamentosByCliente(@PathVariable(value="id_user") long idUser){
+        Optional<UserModel> user = userRepository.findById(idUser);
+        return agendamentoRepository.findByClient(user);
+    }
+
     @GetMapping("/agendamento/{id}")
     public Optional<AgendamentoModel> getAgendamentoById(@PathVariable(value="id") long id){
         return agendamentoRepository.findById(id);
@@ -82,9 +88,10 @@ public class AgendamentoController {
 
 
     @PutMapping("/agendamento/completed/{id}")
-    public AgendamentoModel updateAgendamentoCompleted(@PathVariable(value="id") long id, @RequestBody @Valid Date dateCompleted) {
+    public AgendamentoModel updateAgendamentoCompleted(@PathVariable(value="id") long id) {
         Optional<AgendamentoModel> agendamento = agendamentoRepository.findById(id);
-        agendamento.get().setServiceCompleted(dateCompleted);
+        agendamento.get().setServiceCompleted(new Date());
+        agendamento.get().setStatus(Status.CONCLUIDO);
 
         AtendimentoModel atendimento = new AtendimentoModel();
         atendimento.setAgendamento(agendamento.get());
