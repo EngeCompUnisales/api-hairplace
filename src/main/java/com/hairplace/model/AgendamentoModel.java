@@ -28,6 +28,9 @@ public class AgendamentoModel implements Serializable{
     @Column(name = "realizado", unique = false, nullable = true)
     private Date serviceCompleted;
 
+    @Column(name = "avaliacao", unique = false, nullable = true)
+    private long avaliacao;
+
     @OneToOne(cascade = CascadeType.ALL)
     @JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
     @JoinColumn(name = "id_usuario", referencedColumnName = "id")
@@ -45,5 +48,6 @@ public class AgendamentoModel implements Serializable{
 
     @Enumerated(value = EnumType.STRING)
     private Status status;
+
 
 }

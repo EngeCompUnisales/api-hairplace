@@ -102,4 +102,12 @@ public class AgendamentoController {
         return agendamentoRepository.save(agendamento.get());
     }
 
+    @PutMapping("/agendamento/Avaliar/{id}")
+    public AgendamentoModel updateAgendamentoAvaliar(@PathVariable(value="id") long id, @RequestBody @Valid long nota )  {
+        Optional<AgendamentoModel> agendamento = agendamentoRepository.findById(id);
+        agendamento.get().setAvaliacao(nota);
+
+        return agendamentoRepository.save(agendamento.get());
+    }
+
 }
